@@ -1,220 +1,1044 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title>The Marshallys Archive</title>
+    <title>The Marshallys Archive</title>
+
+    <meta name="description"
+        content="The Marshallys Archive — a collection of places, moments, and memories.">
+
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            margin: 0;
-            background: #0d0d0d;
-            color: #f1f1f1;
-            font-family: Arial, sans-serif;
+            background: #0a0a09;
+            color: #e8e3d8;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
         }
 
-        header {
-            padding: 55px 25px 35px;
-            text-align: center;
+        /* -------------------------
+           GRAIN
+        ------------------------- */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.035;
+            z-index: 100;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
         }
 
-        header h1 {
-            margin: 0;
-            font-family: Georgia, serif;
-            font-size: clamp(32px, 7vw, 58px);
-            letter-spacing: 6px;
-            font-weight: normal;
+
+        /* -------------------------
+           HERO
+        ------------------------- */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(5,5,4,0.25),
+                    rgba(5,5,4,0.72) 65%,
+                    #0a0a09 100%
+                ),
+                url("20251017_143542.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            overflow: hidden;
         }
 
-        header p {
-            margin: 14px 0 0;
-            color: #888;
-            font-size: 14px;
-            letter-spacing: 1px;
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    transparent 20%,
+                    rgba(0,0,0,0.35) 100%
+                );
+
+            pointer-events: none;
         }
 
-        .gallery {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px;
-        }
 
-        .record {
-            margin-bottom: 90px;
-        }
+        /* -------------------------
+           NAVIGATION
+        ------------------------- */
 
-        .record img {
+        nav {
+            position: relative;
+            z-index: 10;
+
             width: 100%;
-            height: auto;
-            display: block;
-        }
+            padding: 35px 6vw;
 
-        .record-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 2px;
-            border-bottom: 1px solid #292929;
+
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 10px;
+        }
+
+        .nav-logo {
+            color: #e8e3d8;
+            text-decoration: none;
+            letter-spacing: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            color: #d6d0c4;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.45;
+        }
+
+
+        /* -------------------------
+           HERO CONTENT
+        ------------------------- */
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            max-width: 900px;
+            margin: auto;
+
+            padding: 60px 25px 120px;
+
+            text-align: center;
+        }
+
+        .small-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-style: italic;
+            letter-spacing: 3px;
+
+            color: #c8c0ad;
+
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: clamp(55px, 10vw, 125px);
+
+            line-height: 0.82;
+
+            font-weight: 400;
+
+            letter-spacing: 10px;
+
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero-line {
+            width: 55px;
+            height: 1px;
+
+            background: #aaa28e;
+
+            margin: 40px auto 25px;
+        }
+
+        .tagline {
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 21px;
+
+            font-style: italic;
+
+            letter-spacing: 2px;
+
+            color: #c8c1b5;
+
+            line-height: 1.5;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+
+            bottom: 35px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 4px;
+
+            color: #aaa395;
+        }
+
+        .scroll-indicator::after {
+            content: "";
+
+            display: block;
+
+            width: 1px;
+            height: 45px;
+
+            background: #777264;
+
+            margin: 12px auto 0;
+        }
+
+
+        /* -------------------------
+           ARCHIVE INTRO
+        ------------------------- */
+
+        .archive-intro {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 120px 6vw 70px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+
+            border-bottom: 1px solid #292923;
+        }
+
+        .archive-intro h2 {
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: clamp(38px, 5vw, 65px);
+
+            font-weight: 400;
+
+            letter-spacing: 1px;
+        }
+
+        .archive-intro p {
+            max-width: 320px;
+
+            color: #8f8b81;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* -------------------------
+           GALLERY
+        ------------------------- */
+
+        .gallery {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 70px 6vw 140px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            column-gap: 65px;
+
+            row-gap: 110px;
+        }
+
+
+        /* -------------------------
+           RECORD
+        ------------------------- */
+
+        .record {
+            position: relative;
+
+            opacity: 0;
+
+            transform: translateY(35px);
+
+            animation: appear 1s ease forwards;
+        }
+
+        .record:nth-child(1) { animation-delay: .1s; }
+        .record:nth-child(2) { animation-delay: .2s; }
+        .record:nth-child(3) { animation-delay: .3s; }
+        .record:nth-child(4) { animation-delay: .4s; }
+        .record:nth-child(5) { animation-delay: .5s; }
+        .record:nth-child(6) { animation-delay: .6s; }
+        .record:nth-child(7) { animation-delay: .7s; }
+        .record:nth-child(8) { animation-delay: .8s; }
+        .record:nth-child(9) { animation-delay: .9s; }
+        .record:nth-child(10) { animation-delay: 1s; }
+
+        @keyframes appear {
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* -------------------------
+           PHOTO
+        ------------------------- */
+
+        .photo-frame {
+            overflow: hidden;
+
+            background: #11110f;
+
+            aspect-ratio: 4 / 3;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition:
+                transform 1.2s cubic-bezier(.2,.7,.2,1),
+                filter 1s ease;
+        }
+
+        .record:hover .photo-frame img {
+            transform: scale(1.045);
+
+            filter: brightness(1.06);
+        }
+
+
+        /* -------------------------
+           RECORD INFORMATION
+        ------------------------- */
+
+        .record-info {
+            padding: 22px 2px 0;
+
+            display: grid;
+
+            grid-template-columns: 55px 1fr;
+
+            gap: 15px;
         }
 
         .record-number {
-            font-size: 12px;
+            font-size: 10px;
+
             letter-spacing: 3px;
-            color: #aaa;
+
+            color: #777367;
+
+            padding-top: 3px;
+        }
+
+        .record-details {
+            border-left: 1px solid #39372f;
+
+            padding-left: 18px;
+        }
+
+        .record-title {
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 25px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            color: #ded8cb;
+
+            margin-bottom: 8px;
         }
 
         .location {
-            font-size: 13px;
-            color: #888;
-            text-align: right;
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            color: #888479;
+
+            line-height: 1.7;
         }
+
+        .pin {
+            color: #aaa18b;
+
+            margin-right: 5px;
+        }
+
+
+        /* -------------------------
+           FOOTER
+        ------------------------- */
 
         footer {
-            text-align: center;
-            padding: 50px 20px;
-            color: #555;
-            font-size: 11px;
-            letter-spacing: 2px;
+            border-top: 1px solid #292923;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 60px 6vw 70px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
         }
 
-        @media (max-width: 600px) {
-            .record-info {
+        .footer-title {
+            font-family: 'Cormorant Garamond', serif;
+
+            font-size: 20px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+        }
+
+        .footer-right {
+            color: #6e6b63;
+
+            font-family: 'Cormorant Garamond', serif;
+
+            font-style: italic;
+
+            font-size: 15px;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* -------------------------
+           MOBILE
+        ------------------------- */
+
+        @media (max-width: 700px) {
+
+            nav {
+                padding: 25px 22px;
+
+                letter-spacing: 2px;
+            }
+
+            .nav-links {
+                gap: 18px;
+            }
+
+            .hero-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .hero h1 {
+                font-size: clamp(48px, 15vw, 75px);
+
+                letter-spacing: 5px;
+            }
+
+            .small-title {
+                font-size: 18px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .archive-intro {
                 display: block;
+
+                padding: 85px 25px 45px;
             }
 
-            .location {
-                text-align: left;
-                margin-top: 8px;
+            .archive-intro h2 {
+                margin-bottom: 25px;
             }
+
+            .gallery {
+                display: block;
+
+                padding: 45px 22px 90px;
+            }
+
+            .record {
+                margin-bottom: 75px;
+            }
+
+            .record-info {
+                grid-template-columns: 45px 1fr;
+            }
+
+            .record-title {
+                font-size: 22px;
+            }
+
+            footer {
+                display: block;
+
+                text-align: center;
+
+                padding: 50px 25px 60px;
+            }
+
+            .footer-right {
+                margin-top: 15px;
+            }
+
         }
+
     </style>
 </head>
 
+
 <body>
 
-<header>
-    <h1>THE MARSHALLYS ARCHIVE</h1>
-    <p>A collection of places, moments, and memories.</p>
-</header>
 
-<main class="gallery">
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <nav>
+
+        <a href="#home" class="nav-logo">
+            MARSHALLYS
+        </a>
+
+        <div class="nav-links">
+
+            <a href="#archive">
+                Archive
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            the
+        </div>
+
+        <h1>
+            <span>Marshallys</span>
+            <span>Archive</span>
+        </h1>
+
+        <div class="hero-line"></div>
+
+        <p class="tagline">
+            A collection of places,<br>
+            moments, and memories.
+        </p>
+
+    </div>
+
+
+    <div class="scroll-indicator">
+        Scroll
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section class="archive-intro" id="about">
+
+    <h2>
+        The Archive
+    </h2>
+
+    <p>
+        Photographs collected along the way.
+        Places visited, moments noticed,
+        and memories worth keeping.
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     RECORDS
+========================= -->
+
+<main class="gallery" id="archive">
+
+
+    <!-- RECORD 001 -->
 
     <article class="record">
-        <img src="20251017_143542.jpg" alt="Nature photograph">
+
+        <div class="photo-frame">
+
+            <img
+                src="20251017_143542.jpg"
+                alt="Record 001"
+            >
+
+        </div>
 
         <div class="record-info">
-            <div class="record-number">RECORD 001</div>
-            <div class="location">
-                📍 Kyntaiai Valley, Mawsaw, Laitphlang, Meghalaya
+
+            <div class="record-number">
+                001
             </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Kyntaiai Valley
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Mawsaw, Laitphlang, Meghalaya
+                </div>
+
+            </div>
+
         </div>
+
     </article>
 
 
+
+    <!-- RECORD 002 -->
+
     <article class="record">
-        <img src="20251017_143832.jpg" alt="Nature photograph">
+
+        <div class="photo-frame">
+
+            <img
+                src="20251017_143832.jpg"
+                alt="Record 002"
+            >
+
+        </div>
 
         <div class="record-info">
-            <div class="record-number">RECORD 002</div>
-            <div class="location">
-                📍 Kyntaiai Valley, Mawsaw, Laitphlang, Meghalaya
+
+            <div class="record-number">
+                002
             </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Kyntaiai Valley
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Mawsaw, Laitphlang, Meghalaya
+                </div>
+
+            </div>
+
         </div>
+
     </article>
 
 
+
+    <!-- RECORD 003 -->
+
     <article class="record">
-        <img src="20251125_121128.jpg" alt="Nature photograph">
+
+        <div class="photo-frame">
+
+            <img
+                src="20251125_121128.jpg"
+                alt="Record 003"
+            >
+
+        </div>
 
         <div class="record-info">
-            <div class="record-number">RECORD 003</div>
-            <div class="location">
-                📍 NEHU, Shillong, Meghalaya
+
+            <div class="record-number">
+                003
             </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    NEHU
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Shillong, Meghalaya
+                </div>
+
+            </div>
+
         </div>
+
     </article>
 
 
+
+    <!-- RECORD 004 -->
+
     <article class="record">
-        <img src="20260501_174153.jpg" alt="Nature photograph">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260501_174153.jpg"
+                alt="Record 004"
+            >
+
+        </div>
 
         <div class="record-info">
-            <div class="record-number">RECORD 004</div>
-            <div class="location">
-                📍 Mawbri, Shillong–Sohra Road, Meghalaya
+
+            <div class="record-number">
+                004
             </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Mawbri
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Shillong–Sohra Road, Meghalaya
+                </div>
+
+            </div>
+
         </div>
+
     </article>
 
 
+
+    <!-- RECORD 005 -->
+
     <article class="record">
-        <img src="20260919_123813.jpg" alt="Nature photograph">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260919_123813.jpg"
+                alt="Record 005"
+            >
+
+        </div>
 
         <div class="record-info">
-            <div class="record-number">RECORD 005</div>
-            <div class="location">
-                📍 Umkhoi, Mawblang, Meghalaya
+
+            <div class="record-number">
+                005
             </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Umkhoi
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Mawblang, Meghalaya
+                </div>
+
+            </div>
+
         </div>
+
     </article>
 
-<article class="record">
-    <img src="20251227_130855.jpg" alt="Nature photograph">
-    <div class="record-info">
-        <div class="record-number">RECORD 006</div>
-        <div class="location">
-            📍 Wahblei, West Khasi Hills, Meghalaya
-        </div>
-    </div>
-</article>
 
-<article class="record">
-    <img src="20260501_144658.jpg" alt="Nature photograph">
-    <div class="record-info">
-        <div class="record-number">RECORD 007</div>
-        <div class="location">
-            📍 Ri-Skai Park, Meghalaya
-        </div>
-    </div>
-</article>
 
-<article class="record">
-    <img src="20260501_174508.jpg" alt="Nature photograph">
-    <div class="record-info">
-        <div class="record-number">RECORD 008</div>
-        <div class="location">
-            📍 Mawbri, Shillong–Sohra Road, Meghalaya
-        </div>
-    </div>
-</article>
+    <!-- RECORD 006 -->
 
-<article class="record">
-    <img src="20260810_160250(1).jpg" alt="Nature photograph">
-    <div class="record-info">
-        <div class="record-number">RECORD 009</div>
-        <div class="location">
-            📍 Umiam Lake, Shillong, Meghalaya
-        </div>
-    </div>
-</article>
+    <article class="record">
 
-<article class="record">
-    <img src="20260919_112528.jpg" alt="Nature photograph">
-    <div class="record-info">
-        <div class="record-number">RECORD 010</div>
-        <div class="location">
-            📍 Umkhoi, Mawblang, Meghalaya
+        <div class="photo-frame">
+
+            <img
+                src="20251227_130855.jpg"
+                alt="Record 006"
+            >
+
         </div>
-    </div>
-</article></main>
+
+        <div class="record-info">
+
+            <div class="record-number">
+                006
+            </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Wahblei
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    West Khasi Hills, Meghalaya
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- RECORD 007 -->
+
+    <article class="record">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260501_144658.jpg"
+                alt="Record 007"
+            >
+
+        </div>
+
+        <div class="record-info">
+
+            <div class="record-number">
+                007
+            </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Ri-Skai Park
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Meghalaya
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- RECORD 008 -->
+
+    <article class="record">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260501_174508.jpg"
+                alt="Record 008"
+            >
+
+        </div>
+
+        <div class="record-info">
+
+            <div class="record-number">
+                008
+            </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Mawbri
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Shillong–Sohra Road, Meghalaya
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- RECORD 009 -->
+
+    <article class="record">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260810_160250(1).jpg"
+                alt="Record 009"
+            >
+
+        </div>
+
+        <div class="record-info">
+
+            <div class="record-number">
+                009
+            </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Umiam Lake
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Shillong, Meghalaya
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- RECORD 010 -->
+
+    <article class="record">
+
+        <div class="photo-frame">
+
+            <img
+                src="20260919_112528.jpg"
+                alt="Record 010"
+            >
+
+        </div>
+
+        <div class="record-info">
+
+            <div class="record-number">
+                010
+            </div>
+
+            <div class="record-details">
+
+                <div class="record-title">
+                    Umkhoi, Mawblang
+                </div>
+
+                <div class="location">
+                    <span class="pin">⌖</span>
+                    Meghalaya
+                </div>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-    THE MARSHALLYS ARCHIVE
+
+    <div class="footer-title">
+        The Marshallys Archive
+    </div>
+
+    <div class="footer-right">
+        Places · Moments · Memories
+    </div>
+
 </footer>
 
+
 </body>
+
 </html>
