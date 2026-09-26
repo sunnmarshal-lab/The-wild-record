@@ -1,587 +1,707 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>The Marshallys Archive</title>
-
-    <meta name="description"
-        content="The Marshallys Archive — a collection of places, moments, and memories.">
-
-    <style>
-
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #0a0a09;
-            color: #e8e3d8;
-            font-family: 'Inter', sans-serif;
-            font-weight: 300;
-            overflow-x: hidden;
-        }
-
-        /* -------------------------
-           GRAIN
-        ------------------------- */
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.035;
-            z-index: 100;
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-        }
-
-
-        /* -------------------------
-           HERO
-        ------------------------- */
-
-        .hero {
-            min-height: 100vh;
-            position: relative;
-
-            display: flex;
-            flex-direction: column;
-
-            background:
-                linear-gradient(
-                    to bottom,
-                    rgba(5,5,4,0.25),
-                    rgba(5,5,4,0.72) 65%,
-                    #0a0a09 100%
-                ),
-                url("20251017_143542.jpg");
-
-            background-size: cover;
-            background-position: center;
-
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    transparent 20%,
-                    rgba(0,0,0,0.35) 100%
-                );
-
-            pointer-events: none;
-        }
-
-
-        /* -------------------------
-           NAVIGATION
-        ------------------------- */
-
-        nav {
-            position: relative;
-            z-index: 10;
-
-            width: 100%;
-            padding: 35px 6vw;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-size: 10px;
-        }
-
-        .nav-logo {
-            color: #e8e3d8;
-            text-decoration: none;
-            letter-spacing: 4px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 35px;
-        }
-
-        .nav-links a {
-            color: #d6d0c4;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.45;
-        }
-
-
-        /* -------------------------
-           HERO CONTENT
-        ------------------------- */
-
-        .hero-content {
-            position: relative;
-            z-index: 5;
-
-            flex: 1;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            max-width: 900px;
-            margin: auto;
-
-            padding: 60px 25px 120px;
-
-            text-align: center;
-        }
-
-        .small-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            font-style: italic;
-            letter-spacing: 3px;
-
-            color: #c8c0ad;
-
-            margin-bottom: 12px;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-
-            font-size: clamp(55px, 10vw, 125px);
-
-            line-height: 0.82;
-
-            font-weight: 400;
-
-            letter-spacing: 10px;
-
-            text-transform: uppercase;
-        }
-
-        .hero h1 span {
-            display: block;
-        }
-
-        .hero-line {
-            width: 55px;
-            height: 1px;
-
-            background: #aaa28e;
-
-            margin: 40px auto 25px;
-        }
-
-        .tagline {
-            font-family: 'Cormorant Garamond', serif;
-
-            font-size: 21px;
-
-            font-style: italic;
-
-            letter-spacing: 2px;
-
-            color: #c8c1b5;
-
-            line-height: 1.5;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-
-            bottom: 35px;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 4px;
-
-            color: #aaa395;
-        }
-
-        .scroll-indicator::after {
-            content: "";
-
-            display: block;
-
-            width: 1px;
-            height: 45px;
-
-            background: #777264;
-
-            margin: 12px auto 0;
-        }
-
-
-        /* -------------------------
-           ARCHIVE INTRO
-        ------------------------- */
-
-        .archive-intro {
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 120px 6vw 70px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: end;
-
-            border-bottom: 1px solid #292923;
-        }
-
-        .archive-intro h2 {
-            font-family: 'Cormorant Garamond', serif;
-
-            font-size: clamp(38px, 5vw, 65px);
-
-            font-weight: 400;
-
-            letter-spacing: 1px;
-        }
-
-        .archive-intro p {
-            max-width: 320px;
-
-            color: #8f8b81;
-
-            font-size: 12px;
-
-            line-height: 1.8;
-
-            letter-spacing: 1px;
-        }
-
-
-        /* -------------------------
-           GALLERY
-        ------------------------- */
-
-        .gallery {
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 70px 6vw 140px;
-
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            column-gap: 65px;
-
-            row-gap: 110px;
-        }
-
-
-        /* -------------------------
-           RECORD
-        ------------------------- */
-
-        .record {
-            position: relative;
-
-            opacity: 0;
-
-            transform: translateY(35px);
-
-            animation: appear 1s ease forwards;
-        }
-
-        .record:nth-child(1) { animation-delay: .1s; }
-        .record:nth-child(2) { animation-delay: .2s; }
-        .record:nth-child(3) { animation-delay: .3s; }
-        .record:nth-child(4) { animation-delay: .4s; }
-        .record:nth-child(5) { animation-delay: .5s; }
-        .record:nth-child(6) { animation-delay: .6s; }
-        .record:nth-child(7) { animation-delay: .7s; }
-        .record:nth-child(8) { animation-delay: .8s; }
-        .record:nth-child(9) { animation-delay: .9s; }
-        .record:nth-child(10) { animation-delay: 1s; }
-
-        @keyframes appear {
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-        }
-
-
-        /* -------------------------
-           PHOTO
-        ------------------------- */
-
-        .photo-frame {
-    overflow: hidden;
-    background: #11110f;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>THE MARSHALLYS ARCHIVE</title>
+
+<meta name="description" content="A collection of places, moments, and memories.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+    --bg: #090909;
+    --soft-bg: #10100f;
+    --text: #eeeae0;
+    --muted: #99958b;
+    --line: rgba(238,234,224,.14);
+    --accent: #b8aa8b;
 }
 
-.photo-frame img {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+}
+
+/* ---------- GRAIN ---------- */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- CURSOR GLOW ---------- */
+
+.cursor-glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(185,170,135,.07), transparent 65%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+/* ---------- NAV ---------- */
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 28px 5vw;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    mix-blend-mode: difference;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.nav-right {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-right a {
+    color: white;
+    text-decoration: none;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: .8;
+    transition: opacity .3s;
+}
+
+.nav-right a:hover {
+    opacity: .4;
+}
+
+/* ---------- HERO ---------- */
+
+.hero {
+    position: relative;
+    height: 100svh;
+    min-height: 650px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #090909;
+}
+
+.hero-image {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.25),
+            rgba(0,0,0,.28) 40%,
+            rgba(0,0,0,.88) 100%
+        ),
+        url("20251017_143542.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1.04);
+    animation: heroZoom 12s ease-out forwards;
+}
+
+@keyframes heroZoom {
+    from {
+        transform: scale(1.08);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 30px;
+}
+
+.hero-small {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #d1cabd;
+    letter-spacing: 2px;
+
+    opacity: 0;
+    animation: reveal 1.2s .3s forwards;
+}
+
+.hero h1 {
+    margin-top: 5px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(55px, 11vw, 145px);
+    line-height: .78;
+    font-weight: 400;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+
+    opacity: 0;
+    animation: reveal 1.4s .55s forwards;
+}
+
+.hero h1 span {
+    display: block;
+}
+
+.hero-line {
+    width: 50px;
+    height: 1px;
+    background: var(--accent);
+    margin: 42px auto 25px;
+
+    opacity: 0;
+    animation: reveal 1s 1s forwards;
+}
+
+.hero-subtitle {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-style: italic;
+    letter-spacing: 2px;
+    color: #ccc5b8;
+
+    opacity: 0;
+    animation: reveal 1s 1.2s forwards;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: #c9c3b8;
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    z-index: 5;
+}
+
+.scroll span {
+    display: block;
+    width: 1px;
+    height: 45px;
+    background: rgba(255,255,255,.45);
+    margin: 13px auto 0;
+}
+
+/* ---------- INTRO ---------- */
+
+.intro {
+    min-height: 65vh;
+    padding: 150px 8vw;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10vw;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(130,115,80,.08),
+            transparent 35%
+        ),
+        var(--bg);
+}
+
+.intro-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.intro h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    font-size: clamp(50px, 7vw, 90px);
+    line-height: .9;
+}
+
+.intro-text {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 2;
+    max-width: 420px;
+}
+
+.intro-text::first-letter {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 60px;
+    float: left;
+    line-height: .7;
+    padding-right: 8px;
+    color: var(--text);
+}
+
+/* ---------- ARCHIVE HEADER ---------- */
+
+.archive-header {
+    padding: 100px 8vw 50px;
+    border-top: 1px solid var(--line);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.archive-header h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(45px, 6vw, 75px);
+    font-weight: 400;
+}
+
+.archive-count {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+/* ---------- ARCHIVE ---------- */
+
+.archive {
+    padding: 30px 7vw 160px;
+}
+
+/* Each record gets its own composition */
+
+.record {
+    position: relative;
+    margin-bottom: 180px;
+
+    opacity: 0;
+    transform: translateY(45px);
+    animation: recordReveal 1s ease forwards;
+}
+
+.record:nth-child(even) {
+    margin-left: 10%;
+}
+
+.record:nth-child(3n) {
+    margin-left: 4%;
+    margin-right: 8%;
+}
+
+@keyframes recordReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.photo-wrap {
+    position: relative;
+    overflow: hidden;
+    background: #111;
+}
+
+/*
+ IMPORTANT:
+ The image keeps its natural aspect ratio.
+ NOTHING IS CROPPED.
+*/
+
+.photo-wrap img {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: contain;
+
     transition:
         transform 1.2s cubic-bezier(.2,.7,.2,1),
         filter 1s ease;
 }
 
-        .record:hover .photo-frame img {
-            transform: scale(1.045);
+.record:hover .photo-wrap img {
+    transform: scale(1.025);
+    filter: brightness(1.06);
+}
+
+/* record information */
+
+.record-meta {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    margin-top: 22px;
+}
+
+.record-number {
+    color: var(--accent);
+    font-size: 9px;
+    letter-spacing: 3px;
+    padding-top: 6px;
+}
+
+.record-info {
+    border-left: 1px solid var(--line);
+    padding-left: 22px;
+}
+
+.record-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(25px, 3vw, 40px);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 400;
+}
+
+.record-location {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+/* ---------- SPECIAL BREAK ---------- */
+
+.quote {
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 100px 30px;
+
+    background:
+        linear-gradient(
+            rgba(8,8,7,.75),
+            rgba(8,8,7,.9)
+        ),
+        url("20260501_174153.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.quote p {
+    max-width: 800px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(35px, 5vw, 70px);
+    line-height: 1;
+
+    font-style: italic;
+    font-weight: 300;
+}
+
+.quote small {
+    display: block;
+    margin-top: 30px;
+
+    color: var(--accent);
+    font-family: Inter, sans-serif;
+    font-size: 8px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* ---------- FULLSCREEN VIEWER ---------- */
+
+.viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+
+    background: rgba(5,5,5,.97);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+}
 
-            filter: brightness(1.06);
-        }
+.viewer.active {
+    display: flex;
+}
 
+.viewer img {
+    max-width: 95vw;
+    max-height: 90vh;
 
-        /* -------------------------
-           RECORD INFORMATION
-        ------------------------- */
+    width: auto;
+    height: auto;
 
-        .record-info {
-            padding: 22px 2px 0;
+    object-fit: contain;
+}
 
-            display: grid;
+.close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
 
-            grid-template-columns: 55px 1fr;
+    color: white;
+    font-size: 28px;
+    font-weight: 200;
 
-            gap: 15px;
-        }
+    cursor: pointer;
+}
 
-        .record-number {
-            font-size: 10px;
+.viewer-caption {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
 
-            letter-spacing: 3px;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #aaa;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
 
-            color: #777367;
+/* ---------- FOOTER ---------- */
 
-            padding-top: 3px;
-        }
-
-        .record-details {
-            border-left: 1px solid #39372f;
-
-            padding-left: 18px;
-        }
-
-        .record-title {
-            font-family: 'Cormorant Garamond', serif;
-
-            font-size: 25px;
-
-            letter-spacing: 3px;
-
-            text-transform: uppercase;
-
-            color: #ded8cb;
-
-            margin-bottom: 8px;
-        }
-
-        .location {
-            font-size: 10px;
-
-            letter-spacing: 1.5px;
-
-            color: #888479;
-
-            line-height: 1.7;
-        }
-
-        .pin {
-            color: #aaa18b;
-
-            margin-right: 5px;
-        }
-
-
-        /* -------------------------
-           FOOTER
-        ------------------------- */
-
-        footer {
-            border-top: 1px solid #292923;
-
-            max-width: 1200px;
-
-            margin: auto;
-
-            padding: 60px 6vw 70px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-        }
-
-        .footer-title {
-            font-family: 'Cormorant Garamond', serif;
-
-            font-size: 20px;
-
-            letter-spacing: 4px;
-
-            text-transform: uppercase;
-        }
-
-        .footer-right {
-            color: #6e6b63;
-
-            font-family: 'Cormorant Garamond', serif;
-
-            font-style: italic;
-
-            font-size: 15px;
-
-            letter-spacing: 1px;
-        }
-
-
-        /* -------------------------
-           MOBILE
-        ------------------------- */
-
-        @media (max-width: 700px) {
-
-            nav {
-                padding: 25px 22px;
-
-                letter-spacing: 2px;
-            }
-
-            .nav-links {
-                gap: 18px;
-            }
-
-            .hero-content {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero h1 {
-                font-size: clamp(48px, 15vw, 75px);
-
-                letter-spacing: 5px;
-            }
-
-            .small-title {
-                font-size: 18px;
-            }
-
-            .tagline {
-                font-size: 18px;
-            }
-
-            .archive-intro {
-                display: block;
-
-                padding: 85px 25px 45px;
-            }
-
-            .archive-intro h2 {
-                margin-bottom: 25px;
-            }
-
-            .gallery {
-                display: block;
-
-                padding: 45px 22px 90px;
-            }
-
-            .record {
-                margin-bottom: 75px;
-            }
-
-            .record-info {
-                grid-template-columns: 45px 1fr;
-            }
-
-            .record-title {
-                font-size: 22px;
-            }
-
-            footer {
-                display: block;
-
-                text-align: center;
-
-                padding: 50px 25px 60px;
-            }
-
-            .footer-right {
-                margin-top: 15px;
-            }
-
-        }
-
-    </style>
+.footer {
+    padding: 120px 7vw 40px;
+
+    border-top: 1px solid var(--line);
+
+    background:
+        radial-gradient(
+            circle at 50% 0,
+            rgba(150,130,90,.08),
+            transparent 40%
+        );
+}
+
+.footer-main {
+    min-height: 45vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+.footer-main h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(50px, 9vw, 120px);
+    line-height: .8;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+
+.footer-main p {
+    margin-top: 35px;
+
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.footer-bottom {
+    padding-top: 40px;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-top: 1px solid var(--line);
+
+    color: #65635d;
+
+    font-size: 8px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+    .nav {
+        padding: 22px 20px;
+    }
+
+    .nav-right {
+        gap: 15px;
+    }
+
+    .hero {
+        min-height: 100svh;
+    }
+
+    .hero h1 {
+        font-size: 16vw;
+        letter-spacing: 4px;
+    }
+
+    .hero-subtitle {
+        font-size: 17px;
+    }
+
+    .intro {
+        display: block;
+        padding: 110px 25px;
+    }
+
+    .intro h2 {
+        margin-bottom: 45px;
+    }
+
+    .archive-header {
+        padding: 80px 25px 35px;
+    }
+
+    .archive {
+        padding: 30px 20px 100px;
+    }
+
+    .record,
+    .record:nth-child(even),
+    .record:nth-child(3n) {
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 110px;
+    }
+
+    .record-meta {
+        grid-template-columns: 50px 1fr;
+    }
+
+    .record-info {
+        padding-left: 15px;
+    }
+
+    .record-title {
+        font-size: 25px;
+        letter-spacing: 2px;
+    }
+
+    .quote {
+        min-height: 55vh;
+        background-attachment: scroll;
+    }
+
+    .viewer {
+        padding: 15px;
+    }
+
+    .viewer img {
+        max-width: 100%;
+        max-height: 85vh;
+    }
+
+    .close {
+        top: 15px;
+        right: 20px;
+    }
+
+    .footer {
+        padding: 100px 25px 30px;
+    }
+
+    .footer-main {
+        min-height: 40vh;
+    }
+
+    .footer-main h2 {
+        font-size: 16vw;
+    }
+
+    .footer-bottom {
+        display: block;
+        text-align: center;
+        line-height: 2;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+    <a href="#home" class="logo">
+        MARSHALLYS
+    </a>
+
+    <div class="nav-right">
+        <a href="#archive">Archive</a>
+        <a href="#about">About</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
 
 <section class="hero" id="home">
 
-    <nav>
-
-        <a href="#home" class="nav-logo">
-            MARSHALLYS
-        </a>
-
-        <div class="nav-links">
-
-            <a href="#archive">
-                Archive
-            </a>
-
-            <a href="#about">
-                About
-            </a>
-
-        </div>
-
-    </nav>
-
+    <div class="hero-image"></div>
 
     <div class="hero-content">
 
-        <div class="small-title">
-            the
-        </div>
+        <div class="hero-small">the</div>
 
         <h1>
             <span>Marshallys</span>
@@ -590,79 +710,79 @@
 
         <div class="hero-line"></div>
 
-        <p class="tagline">
-            A collection of places,<br>
-            moments, and memories.
+        <p class="hero-subtitle">
+            A collection of places, moments, and memories.
         </p>
 
     </div>
 
-
-    <div class="scroll-indicator">
+    <div class="scroll">
         Scroll
+        <span></span>
     </div>
 
 </section>
 
 
+<!-- INTRO -->
 
-<!-- =========================
-     INTRO
-========================= -->
+<section class="intro" id="about">
 
-<section class="archive-intro" id="about">
+    <div>
+        <div class="intro-label">The collection</div>
 
-    <h2>
-        The Archive
-    </h2>
+        <h2>
+            Moments<br>
+            worth keeping.
+        </h2>
+    </div>
 
-    <p>
-        Photographs collected along the way.
-        Places visited, moments noticed,
-        and memories worth keeping.
+    <p class="intro-text">
+        A visual record of places visited, moments noticed,
+        and memories captured along the way.
+        No particular order. No particular destination.
+        Just photographs that became worth remembering.
     </p>
 
 </section>
 
 
+<!-- ARCHIVE HEADER -->
 
-<!-- =========================
-     RECORDS
-========================= -->
+<section class="archive-header" id="archive">
 
-<main class="gallery" id="archive">
+    <h2>Archive</h2>
+
+    <div class="archive-count">
+        010 RECORDS
+    </div>
+
+</section>
 
 
-    <!-- RECORD 001 -->
+<!-- RECORDS -->
+
+<main class="archive">
+
+
+    <!-- 001 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20251017_143542.jpg"
-                alt="Record 001"
-            >
-
+        <div class="photo-wrap">
+            <img src="20251017_143542.jpg" alt="Kyntaiai Valley">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                001
-            </div>
+            <div class="record-number">001</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Kyntaiai Valley</div>
 
-                <div class="record-title">
-                    Kyntaiai Valley
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Mawsaw, Laitphlang, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -670,37 +790,24 @@
     </article>
 
 
-
-    <!-- RECORD 002 -->
+    <!-- 002 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20251017_143832.jpg"
-                alt="Record 002"
-            >
-
+        <div class="photo-wrap">
+            <img src="20251017_143832.jpg" alt="Kyntaiai Valley">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                002
-            </div>
+            <div class="record-number">002</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Kyntaiai Valley</div>
 
-                <div class="record-title">
-                    Kyntaiai Valley
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Mawsaw, Laitphlang, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -708,37 +815,24 @@
     </article>
 
 
-
-    <!-- RECORD 003 -->
+    <!-- 003 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20251125_121128.jpg"
-                alt="Record 003"
-            >
-
+        <div class="photo-wrap">
+            <img src="20251125_121128.jpg" alt="NEHU">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                003
-            </div>
+            <div class="record-number">003</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">NEHU</div>
 
-                <div class="record-title">
-                    NEHU
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Shillong, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -746,37 +840,24 @@
     </article>
 
 
-
-    <!-- RECORD 004 -->
+    <!-- 004 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260501_174153.jpg"
-                alt="Record 004"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260501_174153.jpg" alt="Mawbri">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                004
-            </div>
+            <div class="record-number">004</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Mawbri</div>
 
-                <div class="record-title">
-                    Mawbri
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Shillong–Sohra Road, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -784,37 +865,24 @@
     </article>
 
 
-
-    <!-- RECORD 005 -->
+    <!-- 005 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260919_123813.jpg"
-                alt="Record 005"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260919_123813.jpg" alt="Umkhoi">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                005
-            </div>
+            <div class="record-number">005</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Umkhoi</div>
 
-                <div class="record-title">
-                    Umkhoi
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Mawblang, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -822,37 +890,24 @@
     </article>
 
 
-
-    <!-- RECORD 006 -->
+    <!-- 006 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20251227_130855.jpg"
-                alt="Record 006"
-            >
-
+        <div class="photo-wrap">
+            <img src="20251227_130855.jpg" alt="Wahblei">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                006
-            </div>
+            <div class="record-number">006</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Wahblei</div>
 
-                <div class="record-title">
-                    Wahblei
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     West Khasi Hills, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -860,37 +915,24 @@
     </article>
 
 
-
-    <!-- RECORD 007 -->
+    <!-- 007 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260501_144658.jpg"
-                alt="Record 007"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260501_144658.jpg" alt="Ri-Skai Park">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                007
-            </div>
+            <div class="record-number">007</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Ri-Skai Park</div>
 
-                <div class="record-title">
-                    Ri-Skai Park
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -898,37 +940,24 @@
     </article>
 
 
-
-    <!-- RECORD 008 -->
+    <!-- 008 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260501_174508.jpg"
-                alt="Record 008"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260501_174508.jpg" alt="Mawbri">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                008
-            </div>
+            <div class="record-number">008</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Mawbri</div>
 
-                <div class="record-title">
-                    Mawbri
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Shillong–Sohra Road, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -936,37 +965,24 @@
     </article>
 
 
-
-    <!-- RECORD 009 -->
+    <!-- 009 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260810_160250(1).jpg"
-                alt="Record 009"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260810_160250(1).jpg" alt="Umiam Lake">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                009
-            </div>
+            <div class="record-number">009</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Umiam Lake</div>
 
-                <div class="record-title">
-                    Umiam Lake
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Shillong, Meghalaya
                 </div>
-
             </div>
 
         </div>
@@ -974,65 +990,140 @@
     </article>
 
 
-
-    <!-- RECORD 010 -->
+    <!-- 010 -->
 
     <article class="record">
 
-        <div class="photo-frame">
-
-            <img
-                src="20260919_112528.jpg"
-                alt="Record 010"
-            >
-
+        <div class="photo-wrap">
+            <img src="20260919_112528.jpg" alt="Umkhoi">
         </div>
 
-        <div class="record-info">
+        <div class="record-meta">
 
-            <div class="record-number">
-                010
-            </div>
+            <div class="record-number">010</div>
 
-            <div class="record-details">
+            <div class="record-info">
+                <div class="record-title">Umkhoi, Mawblang</div>
 
-                <div class="record-title">
-                    Umkhoi, Mawblang
-                </div>
-
-                <div class="location">
-                    <span class="pin">⌖</span>
+                <div class="record-location">
                     Meghalaya
                 </div>
-
             </div>
 
         </div>
 
     </article>
-
 
 </main>
 
 
+<!-- QUOTE / VISUAL BREAK -->
 
-<!-- =========================
-     FOOTER
-========================= -->
+<section class="quote">
 
-<footer>
+    <div>
 
-    <div class="footer-title">
-        The Marshallys Archive
+        <p>
+            “Some moments are too beautiful
+            to leave only in memory.”
+        </p>
+
+        <small>
+            The Marshallys Archive
+        </small>
+
     </div>
 
-    <div class="footer-right">
-        Places · Moments · Memories
+</section>
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-main">
+
+        <h2>
+            THE<br>
+            MARSHALLYS<br>
+            ARCHIVE
+        </h2>
+
+        <p>
+            Places · Moments · Memories
+        </p>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        <span>
+            A personal visual archive
+        </span>
+
+        <span>
+            © 2026 The Marshallys Archive
+        </span>
+
     </div>
 
 </footer>
 
 
-</body>
+<!-- FULLSCREEN PHOTO VIEWER -->
 
-</html>
+<div class="viewer" id="viewer">
+
+    <div class="close" id="closeViewer">
+        ×
+    </div>
+
+    <img id="viewerImage" src="" alt="">
+
+    <div class="viewer-caption" id="viewerCaption"></div>
+
+</div>
+
+
+<script>
+
+/* ---------- CURSOR LIGHT ---------- */
+
+const glow = document.getElementById("cursorGlow");
+
+document.addEventListener("mousemove", function(e) {
+
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+
+});
+
+
+/* ---------- PHOTO VIEWER ---------- */
+
+const viewer = document.getElementById("viewer");
+const viewerImage = document.getElementById("viewerImage");
+const viewerCaption = document.getElementById("viewerCaption");
+const closeViewer = document.getElementById("closeViewer");
+
+document.querySelectorAll(".photo-wrap img").forEach(function(image) {
+
+    image.addEventListener("click", function() {
+
+        viewerImage.src = image.src;
+        viewerImage.alt = image.alt;
+
+        viewerCaption.textContent = image.alt;
+
+        viewer.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    });
+
+});
+
+
+closeViewer.addEventListener("click", function() {
+
+    viewer.classList.remove("a
